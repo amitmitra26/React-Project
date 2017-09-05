@@ -5,17 +5,17 @@ var time = [];
 var hours = [];
 var years = [];
 var months = [];
-for(var i=0; i<30 ; i++)
+for(var i=1; i<=30 ; i++)
 {
-  dates.push(<option>{i + 1}</option>);
+  dates.push(<option>{((i+100).toString()).substr(1)}</option>);
 }
 for(var l=0;l<60; l++)
 {
-  time.push(<option>{l}</option>);
+  time.push(<option>{((l+100).toString()).substr(1)}</option>);
 }
 for(var k=0; k<24; k++)
 {
-  hours.push(<option>{k}</option>);
+  hours.push(<option>{((k+100).toString()).substr(1)}</option>);
 }
 for(var j=2017; j<=2018 ; j++)
 {
@@ -23,7 +23,7 @@ for(var j=2017; j<=2018 ; j++)
 }
 for(var m=1; m<=12; m++)
 {
-  months.push(<option>{m}</option>);
+  months.push(<option>{((m+100).toString()).substr(1)}</option>);
 }
 
 
@@ -31,7 +31,7 @@ class EventCreater extends React.Component {
   constructor(props)
   {
     super(props);
-    this.state = {title: 'None',date: "1",year: "2017",description:"Nothing",month:"1",location:"",hours:"1",time:"0"};
+    this.state = {title: 'None',date: "01",year: "2017",description:"Nothing",month:"01",location:"",hours:"00",time:"00"};
     this.changeState = this.changeState.bind(this)
     this.submitEvent = this.submitEvent.bind(this)
 

@@ -16,8 +16,8 @@ for(year=2017; year<=2018; year++)
     {
 
       var dateEvent = {
-        id: day + "" + month + "" + year,
-        value: day,
+        id: ((day+100).toString()).substr(1) + "" + ((month+100).toString()).substr(1) + "" + year,
+        value: ((day+100).toString()).substr(1),
         listEvent: []
       };
       //dateEvent.value = day;
