@@ -5,7 +5,7 @@ var time = [];
 var hours = [];
 var years = [];
 var months = [];
-for(var i=1; i<=30 ; i++)
+for(var i=1; i<=31 ; i++)
 {
   dates.push(<option key={i}>{((i+100).toString()).substr(1)}</option>);
 }
@@ -17,7 +17,7 @@ for(var k=0; k<24; k++)
 {
   hours.push(<option key={k}>{((k+100).toString()).substr(1)}</option>);
 }
-for(var j=2017; j<=2018 ; j++)
+for(var j=2017; j<=2030 ; j++)
 {
   years.push(<option key={j}>{j}</option>);
 }
@@ -54,13 +54,9 @@ class EventCreater extends React.Component {
                   hours:this.state.hours,
                   time:this.state.time
                 };
-                console.log(obj);
       this.props.titlechange(obj);
 
-      //this.props.events.title.push(obj.title);
-      //console.log(this.props.events.title);
     event.preventDefault();
-
   }
   render(){
     return(

@@ -6,7 +6,7 @@ for(var m=1; m<=12; m++)
 {
   mnths.push(<option key={m}>{((m+100).toString()).substr(1)}</option>);
 }
-for(var j=2017; j<=2018 ; j++)
+for(var j=2017; j<=2030 ; j++)
 {
   yrs.push(<option key={j}>{j}</option>);
 }
@@ -23,7 +23,6 @@ export class ViewCalander extends React.Component{
     const value = target.value
     const name = target.name
     this.setState({[name]: value});
-    console.log(this.state.month);
   }
   showEvent(ev,details)
   {
@@ -70,7 +69,7 @@ export class ViewCalander extends React.Component{
         </p>
         </div>
         <div className="col-sm-12">
-          {this.props.dateElements.map((ev,index)=>((ev.id.substr(2,2) === this.state.month) && (ev.id.substr(4) === this.state.year))?<span key={index}>{ev.value}<ul>{ev.listEvent.map((ls,ind)=><li key={ind} onClick={this.showEvent.bind(this,ev,ls)}>{ls.temp_title}---{ls.temp_time}</li>)}</ul></span>:null)}
+          {this.props.dateElements.map((ev,index)=>((ev.id.substr(2,2) === this.state.month) && (ev.id.substr(4) === this.state.year))?<span key={index}>{ev.value}<ul>{ev.listEvent.map((ls,ind)=><li key={ind} className="event-title" onClick={this.showEvent.bind(this,ev,ls)}>{ls.temp_title}</li>)}</ul></span>:null)}
         </div>
 
       </div>
