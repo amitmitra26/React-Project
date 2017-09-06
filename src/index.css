@@ -3,3 +3,12 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+span, li{
+  float:left;
+  margin: 10px;
+
+}
+
+.view-event{
+  float: left;
+}

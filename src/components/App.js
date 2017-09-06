@@ -16,8 +16,8 @@ for(year=2017; year<=2018; year++)
     {
 
       var dateEvent = {
-        id: day + "" + month + "" + year,
-        value: day,
+        id: ((day+100).toString()).substr(1) + "" + ((month+100).toString()).substr(1) + "" + year,
+        value: ((day+100).toString()).substr(1),
         listEvent: []
       };
       //dateEvent.value = day;
@@ -36,12 +36,9 @@ class App extends React.Component {
     this.onChangeTitle = this.onChangeTitle.bind(this);
   }
   onChangeTitle(newTitle){
-  //  len = this.state.title.length + 1;
-    //arr.push(this.state.title);
     arr.push(newTitle);
     this.setState({evtitle: arr});
     var eventId = newTitle.date + "" + newTitle.month + "" + newTitle.year;
-    //console.log(newTitle);
     var clonedateElements = this.state.dateElements;
     clonedateElements.forEach(function(ev){
       if(ev.id == eventId)
@@ -58,7 +55,6 @@ class App extends React.Component {
       }
     });
     this.setState({dateElements: clonedateElements});
-    //console.log(this.state.evtitle);
   }
 
   render() {
@@ -68,12 +64,10 @@ class App extends React.Component {
           <EventCreater events={this.state} titlechange={this.onChangeTitle.bind(this)} />
         </div>
         <div className="App-intro">
-        <div>
-        Events:
-        <ViewCalander events={this.state.evtitle} dateElements={this.state.dateElements}/>
+          <div>
+            <ViewCalander events={this.state.evtitle} dateElements={this.state.dateElements}/>
+          </div>
         </div>
-        </div>
-
       </div>
     );
   }
