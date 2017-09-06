@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 import EventCreater from './EventCreater'
 import ViewCalander from './ViewCalender'
 
-//var events = { title: ["Ammit","mitra"] };
-//var dateEvent = {};
+
 var dateEvents = [];
 var year, day, month;
 for(year=2017; year<=2018; year++)
@@ -20,8 +18,6 @@ for(year=2017; year<=2018; year++)
         value: ((day+100).toString()).substr(1),
         listEvent: []
       };
-      //dateEvent.value = day;
-      //dateEvent.list = [{timestamp: "", title: ""}];
       dateEvents.push(dateEvent);
     }
   }
@@ -41,9 +37,9 @@ class App extends React.Component {
     var eventId = newTitle.date + "" + newTitle.month + "" + newTitle.year;
     var clonedateElements = this.state.dateElements;
     clonedateElements.forEach(function(ev){
-      if(ev.id == eventId)
+      if(ev.id === eventId)
       {
-        var temp_obj ={
+        var temp_obj = {
           temp_title : newTitle.title,
           temp_time : newTitle.hours + "" + newTitle.time + "",
           temp_desc : newTitle.description,
@@ -59,11 +55,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
+      <div className="App row">
+        <div className="App-header col-sm-4">
           <EventCreater events={this.state} titlechange={this.onChangeTitle.bind(this)} />
         </div>
-        <div className="App-intro">
+        <div className="App-intro col-sm-8">
           <div>
             <ViewCalander events={this.state.evtitle} dateElements={this.state.dateElements}/>
           </div>

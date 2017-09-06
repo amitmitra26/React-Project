@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 var mnths = [];
 var yrs = [];
 for(var m=1; m<=12; m++)
 {
-  mnths.push(<option>{((m+100).toString()).substr(1)}</option>);
+  mnths.push(<option key={m}>{((m+100).toString()).substr(1)}</option>);
 }
 for(var j=2017; j<=2018 ; j++)
 {
-  yrs.push(<option>{j}</option>);
+  yrs.push(<option key={j}>{j}</option>);
 }
 
 export class ViewCalander extends React.Component{
@@ -27,11 +27,13 @@ export class ViewCalander extends React.Component{
   }
   showEvent(ev,details)
   {
-    this.setState({title: details.title});
-    this.state({description: details.description});
-    this.setState({location: details.location});
-    this.setState({timestamp: details.timestamp});
+
+    this.setState({title: details.temp_title});
+    this.setState({description: details.temp_desc});
+    this.setState({location: details.temp_loc});
+    this.setState({timestamp: details.temp_time});
     this.setState({datestamp: ev.id});
+
   }
 
   render(){
@@ -39,22 +41,38 @@ export class ViewCalander extends React.Component{
   return(
     <div>
 
-      Month:<select  name="month" value={this.state.month} onChange={this.handleChange.bind(this)}>
-              {mnths}
-            </select>
-      Year:<select name="year" value={this.state.year} onChange={this.handleChange.bind(this)}>
-             {yrs}
-           </select>
-      <br /><br /><br />
-      <div>
-        {this.props.dateElements.map((ev,index)=>((ev.id.substr(2,2) == this.state.month) && (ev.id.substr(4) == this.state.year))?<span key={index}>{ev.value}<ul>{ev.listEvent.map((ls,ind)=><li key={ind}>{ls.temp_title}---{ls.temp_time}</li>)}</ul></span>:null)}
+      <div className="row">
+      <div className="view-event col-sm-12">
+        <table className="table">
+        <thead><tr><th className="text-center">Event Details</th></tr></thead>
+        <tbody>
+          <tr><th>Title:</th><td>{this.state.title}</td></tr>
+          <tr><th>Description:</th><td>{this.state.description}</td></tr>
+          <tr><th>Location:</th><td>{this.state.location}</td></tr>
+          <tr><th>Date:</th><td>{this.state.datestamp.substr(0,2)+"/"+this.state.datestamp.substr(2,2)+"/"+this.state.datestamp.substr(4)}</td></tr>
+          <tr><th>Time:</th><td>{this.state.timestamp.substr(0,2)+":"+this.state.timestamp.substr(2)}</td></tr>
+        </tbody>
+        </table>
+        <br />
       </div>
-      <div className="view-event">
-        <p>Event Title:{this.state.title}</p>
-        <p>Event Description:{this.state.description}</p>
-        <p>Event Location:{this.state.location}</p>
-        <p>Event Date:{this.state.datestamp.substr(0,2)+"/"+this.state.datestamp.substr(2,2)+"/"+this.state.datestamp.substr(4)}</p>
-        <p>Event Time:{this.state.timestamp.substr(0,2)+":"+this.state.timestamp.substr(2)}</p>
+
+        <div className="col-sm-12">
+        <p className="text-center">
+            Month:
+              <select  name="month" value={this.state.month} onChange={this.handleChange.bind(this)}>
+                {mnths}
+              </select>
+          Year:
+              <select name="year" value={this.state.year} onChange={this.handleChange.bind(this)}>
+                {yrs}
+              </select>
+            <br /><br />
+        </p>
+        </div>
+        <div className="col-sm-12">
+          {this.props.dateElements.map((ev,index)=>((ev.id.substr(2,2) === this.state.month) && (ev.id.substr(4) === this.state.year))?<span key={index}>{ev.value}<ul>{ev.listEvent.map((ls,ind)=><li key={ind} onClick={this.showEvent.bind(this,ev,ls)}>{ls.temp_title}---{ls.temp_time}</li>)}</ul></span>:null)}
+        </div>
+
       </div>
     </div>
   );
