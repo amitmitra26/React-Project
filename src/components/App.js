@@ -6,11 +6,11 @@ import ViewCalander from './ViewCalender'
 
 var dateEvents = [];
 var year, day, month;
-for(year=2017; year<=2018; year++)
+for(year=2017; year<=2030; year++)
 {
   for(month=1; month<=12; month++)
   {
-    for(day=1; day<=30; day++)
+    for(day=1; day<=31; day++)
     {
 
       var dateEvent = {
@@ -18,6 +18,8 @@ for(year=2017; year<=2018; year++)
         value: ((day+100).toString()).substr(1),
         listEvent: []
       };
+      if(month === 2 && day === 29){ break;}
+      if(((month === 4) || (month === 6) || (month === 9) || (month === 11)) && day === 31){ break;}
       dateEvents.push(dateEvent);
     }
   }
@@ -45,7 +47,7 @@ class App extends React.Component {
           temp_desc : newTitle.description,
           temp_loc : newTitle.location
         };
-        console.log(temp_obj);
+
         ev.listEvent.push(temp_obj);
 
       }
