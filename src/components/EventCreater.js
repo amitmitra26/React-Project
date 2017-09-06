@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 var dates = [];
 var time = [];
@@ -7,23 +7,23 @@ var years = [];
 var months = [];
 for(var i=1; i<=30 ; i++)
 {
-  dates.push(<option>{((i+100).toString()).substr(1)}</option>);
+  dates.push(<option key={i}>{((i+100).toString()).substr(1)}</option>);
 }
 for(var l=0;l<60; l++)
 {
-  time.push(<option>{((l+100).toString()).substr(1)}</option>);
+  time.push(<option key={l}>{((l+100).toString()).substr(1)}</option>);
 }
 for(var k=0; k<24; k++)
 {
-  hours.push(<option>{((k+100).toString()).substr(1)}</option>);
+  hours.push(<option key={k}>{((k+100).toString()).substr(1)}</option>);
 }
 for(var j=2017; j<=2018 ; j++)
 {
-  years.push(<option>{j}</option>);
+  years.push(<option key={j}>{j}</option>);
 }
 for(var m=1; m<=12; m++)
 {
-  months.push(<option>{((m+100).toString()).substr(1)}</option>);
+  months.push(<option key={m}>{((m+100).toString()).substr(1)}</option>);
 }
 
 
@@ -31,7 +31,7 @@ class EventCreater extends React.Component {
   constructor(props)
   {
     super(props);
-    this.state = {title: 'None',date: "01",year: "2017",description:"Nothing",month:"01",location:"",hours:"00",time:"00"};
+    this.state = {title: 'Not Specified',date: "01",year: "2017",description:"Not Specified",month:"01",location:"Not Specified",hours:"00",time:"00"};
     this.changeState = this.changeState.bind(this)
     this.submitEvent = this.submitEvent.bind(this)
 
@@ -65,40 +65,62 @@ class EventCreater extends React.Component {
   render(){
     return(
       <form onSubmit={this.submitEvent.bind(this)}>
-        <div>
-          Event: <input type="text" name="title" onChange={this.changeState.bind(this)} />
-          <br />
-          Description: <input type="text" name="description"  onChange={this.changeState.bind(this)}/>
-          <br />
-          Location: <input type="text" name="location" onChange={this.changeState.bind(this)}/>
-          <br /><br />
-        </div>
-        <div>
-          <label>
-            Date:<select name="date" value={this.state.date} onChange={this.changeState.bind(this)}>
-                   {dates}
-                 </select>
-          </label>
-          <label>
-            Month:<select  name="month" value={this.state.month} onChange={this.changeState.bind(this)}>
-                    {months}
-                  </select>
-          </label>
-          <label>
-            Year:<select name="year" value={this.state.year} onChange={this.changeState.bind(this)}>
-                    {years}
-                 </select>
-          </label>
-        </div>
+        <table>
+          <tbody>
+          <tr>
+            <th>Event:</th><td><input type="text" name="title" onChange={this.changeState.bind(this)} /></td>
+          </tr>
+          <tr>
+            <th>Description:</th><td><input type="text" name="description"  onChange={this.changeState.bind(this)}/></td>
+          </tr>
+          <tr>
+            <th>Location:</th><td><input type="text" name="location" onChange={this.changeState.bind(this)}/></td>
+          </tr>
+          </tbody>
+        </table>
         <br />
-        <div>
-          Hours:<select name="hours" value={this.state.hours} onChange={this.changeState.bind(this)}>
+        <table>
+          <tbody>
+          <tr>
+            <th>Date:</th>
+            <td>
+              <select name="date" value={this.state.date} onChange={this.changeState.bind(this)}>
+                 {dates}
+              </select>
+            </td>
+          <th>Month:</th>
+          <td>
+            <select  name="month" value={this.state.month} onChange={this.changeState.bind(this)}>
+              {months}
+            </select>
+          </td>
+          <th>Year:</th>
+          <td>
+            <select name="year" value={this.state.year} onChange={this.changeState.bind(this)}>
+              {years}
+             </select>
+          </td>
+          </tr>
+          </tbody>
+        </table>
+        <br />
+        <table>
+          <tbody>
+          <tr>
+          <th>Hours:</th>
+          <td><select name="hours" value={this.state.hours} onChange={this.changeState.bind(this)}>
                   {hours}
                 </select>
-          Minutes:<select name="time" value={this.state.time} onChange={this.changeState.bind(this)}>
-                    {time}
-                  </select>
-        </div>
+          </td>
+          <th>Minutes:</th>
+          <td>
+            <select name="time" value={this.state.time} onChange={this.changeState.bind(this)}>
+              {time}
+            </select>
+          </td>
+          </tr>
+          </tbody>
+        </table>
         <br />
         <input type="submit" value="Submit" />
       </form>
