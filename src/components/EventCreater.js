@@ -49,11 +49,12 @@ class EventCreater extends React.Component {
                   date:this.state.date,
                   year:this.state.year,
                   month:this.state.month,
-                  description:this.description,
+                  description:this.state.description,
                   location:this.state.location,
                   hours:this.state.hours,
                   time:this.state.time
                 };
+                console.log(obj);
       this.props.titlechange(obj);
 
       //this.props.events.title.push(obj.title);
@@ -64,37 +65,41 @@ class EventCreater extends React.Component {
   render(){
     return(
       <form onSubmit={this.submitEvent.bind(this)}>
-      Event:
-      <input type="text" name="title" onChange={this.changeState.bind(this)} />
-      <br />
-   Description:
-   <input type="text" name="description"  onChange={this.changeState.bind(this)}/>
-   <br />
-   Location:
-   <input type="text" name="location" onChange={this.changeState.bind(this)}/>
-   <br />
-     <label>
-       Pick your Date:
-       <select name="date" value={this.state.date} onChange={this.changeState.bind(this)}>
-         {dates}
-       </select>
-
-       <select  name="month" value={this.state.month} onChange={this.changeState.bind(this)}>
-         {months}
-       </select>
-       <select name="year" value={this.state.year} onChange={this.changeState.bind(this)}>
-         {years}
-       </select>
-     </label>
-     <label>
-       Pick your Time:
-       <select name="hours" value={this.state.hours} onChange={this.changeState.bind(this)}>
-         {hours}
-       </select>
-       <select name="time" value={this.state.time} onChange={this.changeState.bind(this)}>
-         {time}
-       </select>
-     </label>
+        <div>
+          Event: <input type="text" name="title" onChange={this.changeState.bind(this)} />
+          <br />
+          Description: <input type="text" name="description"  onChange={this.changeState.bind(this)}/>
+          <br />
+          Location: <input type="text" name="location" onChange={this.changeState.bind(this)}/>
+          <br /><br />
+        </div>
+        <div>
+          <label>
+            Date:<select name="date" value={this.state.date} onChange={this.changeState.bind(this)}>
+                   {dates}
+                 </select>
+          </label>
+          <label>
+            Month:<select  name="month" value={this.state.month} onChange={this.changeState.bind(this)}>
+                    {months}
+                  </select>
+          </label>
+          <label>
+            Year:<select name="year" value={this.state.year} onChange={this.changeState.bind(this)}>
+                    {years}
+                 </select>
+          </label>
+        </div>
+        <br />
+        <div>
+          Hours:<select name="hours" value={this.state.hours} onChange={this.changeState.bind(this)}>
+                  {hours}
+                </select>
+          Minutes:<select name="time" value={this.state.time} onChange={this.changeState.bind(this)}>
+                    {time}
+                  </select>
+        </div>
+        <br />
         <input type="submit" value="Submit" />
       </form>
     );
